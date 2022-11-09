@@ -1,34 +1,37 @@
-const canvas = document.querySelector("#aCanvas");
+const imageWidth = 200;
+const imageHeight = 150;
+let imgNum = 1;
 
+const canvas = document.querySelector("#aCanvas");
 //canvas.width = Math.min("1200", window.innerWidth);
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
-const sizeX = 150;
-const sizeY = 150;
-let rngNum = 1;
-
-let image = new Image();
-image.src = `https://source.unsplash.com/random/${sizeX}x${sizeY}/?sig=${rngNum}`;
-
 const ctx = canvas.getContext("2d");
 
-const handleMouseMove = (event) => {
-  if (event.pageY < canvas.height - (sizeY / 2)) {
-    ctx.drawImage(image, event.pageX - sizeX / 2, event.pageY - sizeY / 2, sizeX, sizeY);
+let image = new Image();
+image.src = `https://source.unsplash.com/random/${imageWidth}x${imageHeight}/?sig=${imgNum}`;
+
+writeText();
+
+canvas.addEventListener("mousemove", handleMouseMove);
+canvas.addEventListener("click", handleMouseClick);
+
+function handleMouseMove(event) {
+  if (event.pageY < canvas.height - (imageHeight / 2)) {
+    ctx.drawImage(image, event.pageX - imageWidth / 2, event.pageY - imageHeight / 2, imageWidth, imageHeight);
     writeText();
   }
 };
 
 async function handleMouseClick(event) {
   let newImage = new Image();
-  rngNum = getRandomInt(2, 1000);
-  newImage.src = `https://source.unsplash.com/random/${sizeX}x${sizeY}/?sig=${rngNum}`;
+  imgNum++;
+  newImage.src = `https://source.unsplash.com/random/${imageWidth}x${imageHeight}/?sig=${imgNum}`;
   await newImage.decode();
   image = newImage;
 };
 
-const writeText = () => {
+function writeText() {
   ctx.fillStyle = 'orange';
   ctx.strokeStyle = 'black';
   ctx.font = '100px serif';
@@ -38,10 +41,6 @@ const writeText = () => {
   ctx.strokeText('Hello world', canvas.width - 500, canvas.height - 40);
 };
 
-writeText();
-
-canvas.addEventListener("mousemove", handleMouseMove);
-canvas.addEventListener("click", handleMouseClick);
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
