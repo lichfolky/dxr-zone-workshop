@@ -13,6 +13,7 @@ let image = imageOdd;
 let odd = false;
 
 const ctx = canvas.getContext("2d");
+
 const handleMouseMove = (event) => {
   if (event.pageY < canvas.height - (sizeY / 2)) {
     console.log(event.pageY, canvas.height - (sizeY / 2));
@@ -42,9 +43,10 @@ const writeText = () => {
   ctx.strokeText('Hello world', canvas.width - 500, canvas.height - 40);
 };
 
+writeText();
+
 canvas.addEventListener("mousemove", handleMouseMove);
 canvas.addEventListener("click", handleMouseClick);
-
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
