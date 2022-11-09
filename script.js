@@ -1,14 +1,15 @@
 const canvas = document.querySelector("#aCanvas");
 
-canvas.width = Math.min("1200", window.innerWidth);
+//canvas.width = Math.min("1200", window.innerWidth);
+canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const sizeX = 100;
-const sizeY = 100;
+const sizeX = 150;
+const sizeY = 150;
 let imageOdd = new Image();
 imageOdd.src = "https://source.unsplash.com/random/150x150";
 let imageEven = new Image();
-imageEven.src = "https://source.unsplash.com/random/140x140";
+imageEven.src = "https://source.unsplash.com/random/149x149";
 let image = imageOdd;
 let odd = false;
 
@@ -16,7 +17,6 @@ const ctx = canvas.getContext("2d");
 
 const handleMouseMove = (event) => {
   if (event.pageY < canvas.height - (sizeY / 2)) {
-    console.log(event.pageY, canvas.height - (sizeY / 2));
     ctx.drawImage(image, event.pageX - sizeX / 2, event.pageY - sizeY / 2, sizeX, sizeY);
     writeText();
   }
