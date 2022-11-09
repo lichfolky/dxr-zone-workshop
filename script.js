@@ -1,6 +1,6 @@
 const imageWidth = 200;
 const imageHeight = 150;
-let imgNum = 1;
+let imgNum = 5;
 
 const canvas = document.querySelector("#aCanvas");
 //canvas.width = Math.min("1200", window.innerWidth);
